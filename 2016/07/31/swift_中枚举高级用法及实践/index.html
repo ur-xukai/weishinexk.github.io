@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Swift 中枚举高级用法及实践 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Swift 中枚举高级用法及实践本文是一篇详细且具有实战意义的教程，涵盖几乎所有枚举(Enum)知识点，为你解答Swift中枚举的应用场合以及使用方法。
+和switch语句类似，Swift中的枚举乍看之下更像是C语言中枚举的进阶版本，即允许你定义一种类型，用于表示普通事情中某种用例。不过深入挖掘之后，凭借Swift背后特别的设计理念，相比较C语言枚举来说其在实际场景中的应用更为广泛。特别是作为强大">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Swift 中枚举高级用法及实践">
+<meta property="og:url" content="http://yoursite.com/2016/07/31/swift_中枚举高级用法及实践/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Swift 中枚举高级用法及实践本文是一篇详细且具有实战意义的教程，涵盖几乎所有枚举(Enum)知识点，为你解答Swift中枚举的应用场合以及使用方法。
+和switch语句类似，Swift中的枚举乍看之下更像是C语言中枚举的进阶版本，即允许你定义一种类型，用于表示普通事情中某种用例。不过深入挖掘之后，凭借Swift背后特别的设计理念，相比较C语言枚举来说其在实际场景中的应用更为广泛。特别是作为强大">
+<meta property="og:updated_time" content="2016-08-06T03:10:34.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Swift 中枚举高级用法及实践">
+<meta name="twitter:description" content="Swift 中枚举高级用法及实践本文是一篇详细且具有实战意义的教程，涵盖几乎所有枚举(Enum)知识点，为你解答Swift中枚举的应用场合以及使用方法。
+和switch语句类似，Swift中的枚举乍看之下更像是C语言中枚举的进阶版本，即允许你定义一种类型，用于表示普通事情中某种用例。不过深入挖掘之后，凭借Swift背后特别的设计理念，相比较C语言枚举来说其在实际场景中的应用更为广泛。特别是作为强大">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-swift_中枚举高级用法及实践" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/07/31/swift_中枚举高级用法及实践/" class="article-date">
+  <time datetime="2016-07-31T15:05:15.000Z" itemprop="datePublished">2016-07-31</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Swift 中枚举高级用法及实践
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Swift-中枚举高级用法及实践"><a href="#Swift-中枚举高级用法及实践" class="headerlink" title="Swift 中枚举高级用法及实践"></a>Swift 中枚举高级用法及实践</h1><p>本文是一篇详细且具有实战意义的教程，涵盖几乎所有枚举(Enum)知识点，为你解答Swift中枚举的应用场合以及使用方法。</p>
+<p>和switch语句类似，Swift中的枚举乍看之下更像是C语言中枚举的进阶版本，即允许你定义一种类型，用于表示普通事情中某种用例。不过深入挖掘之后，凭借Swift背后特别的设计理念，相比较C语言枚举来说其在实际场景中的应用更为广泛。特别是作为强大的工具，Swift中的枚举能够清晰表达代码的意图。</p>
+<p>本文中，我们将首先了解基础语法和使用枚举的可能性，接着通过实战教你如何以及何时使用枚举。最后我们还会大致了解下Swift标准库中枚举是如何被使用的。<br><a id="more"></a><br>正式开始学习之前，先给出枚举的定义。之后我们将回过头再来讨论它。</p>
+<p>枚举声明的类型是囊括可能状态的有限集，且可以具有附加值。通过内嵌(nesting),方法(method),关联值(associated values)和模式匹配(pattern matching),枚举可以分层次地定义任何有组织的数据。</p>
+<h2 id="深入理解-Diving-In"><a href="#深入理解-Diving-In" class="headerlink" title="深入理解(Diving In)"></a>深入理解(Diving In)</h2><hr>
+<p>简要概述如何定义和使用枚举。  </p>
+<h3 id="定义基本的枚举类型-Defining-Basic-Enums"><a href="#定义基本的枚举类型-Defining-Basic-Enums" class="headerlink" title="定义基本的枚举类型(Defining Basic Enums)"></a>定义基本的枚举类型(Defining Basic Enums)</h3><p>试想我们正在开发一款游戏，玩家能够朝四个方向移动。所以喽，玩家的运动轨迹受到了限制。显然，我们能够使用枚举来表述这一情况:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">enum Movement&#123;</div><div class="line">case Left</div><div class="line">case Right</div><div class="line">case Top</div><div class="line">case Bottom</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>紧接着，你可以使用多种模式匹配结构获取到Movement的枚举值，或者按照特定情况执行操作:  </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">let aMovement = Movement.Left</div><div class="line">// switch 分情况处理</div><div class="line">switch aMovement&#123;</div><div class="line">case .Left: print(&quot;left&quot;)</div><div class="line">default:()</div><div class="line">&#125;</div><div class="line">// 明确的case情况</div><div class="line">if case .Left = aMovement&#123;</div><div class="line">print(&quot;left&quot;)</div><div class="line">&#125;</div><div class="line">if aMovement == .Left &#123; </div><div class="line">	print(&quot;left&quot;) </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>案例中，我们无须明确指出enum的实际名称(即case Move.Left:print(“Left”))。因为类型检查器能够自动为此进行类型推算。这对于那些UIKit以及AppKit中错综复杂的枚举是灰常有用的。</p>
+<p>###枚举值(Enum Values)<br>当然，你可能想要为<strong>enum</strong>中每个<strong>case</strong>分配一个值。这相当有用，比如枚举自身实际与某事或某物挂钩时，往往这些东西又需要使用不同类型来表述。在C语言中，你只能为枚举<strong>case</strong>分配整型值，而<strong>Swift</strong>则提供了更多的灵活性。     </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">// 映射到整型</div><div class="line">enum Movement: Int &#123;</div><div class="line">case Left = 0</div><div class="line">case Right = 1</div><div class="line">case Top = 2</div><div class="line">case Bottom = 3</div><div class="line">&#125;&gt; </div><div class="line">// 同样你可以与字符串一一对应</div><div class="line">enum House: String &#123;</div><div class="line">case Baratheon = &quot;Ours is the Fury&quot;</div><div class="line">case Greyjoy = &quot;We Do Not Sow&quot;</div><div class="line">case Martell = &quot;Unbowed, Unbent, Unbroken&quot;</div><div class="line">case Stark = &quot;Winter is Coming&quot;</div><div class="line">case Tully = &quot;Family, Duty, Honor&quot;</div><div class="line">case Tyrell = &quot;Growing Strong&quot;</div><div class="line">&#125;</div><div class="line">// 或者float double都可以(同时注意枚举中的花式unicode)</div><div class="line">enum Constants: Double &#123;</div><div class="line">case π = 3.14159</div><div class="line">case e = 2.71828</div><div class="line">case φ = 1.61803398874</div><div class="line">case λ = 1.30357</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/07/31/swift_中枚举高级用法及实践/" data-id="ciznsol2i0004o9uywqq2w8ex" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/04/swift中怎么用代码画虚线/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
+      <div class="article-nav-title">
+        
+          swift中怎么用代码画虚线
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/07/31/iOS开发之数据存储/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">iOS开发之数据存储</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Mot-clés</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Mac/">Mac</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OC/">OC</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Mac/" style="font-size: 10px;">Mac</a> <a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">July 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/02/27/hello-world/">Hello World</a>
+          </li>
+        
+          <li>
+            <a href="/2017/01/08/Mac_Using/">Mac新手</a>
+          </li>
+        
+          <li>
+            <a href="/2016/09/01/Php探索之路 - 第一天/">PHP探索之路 - 第一天</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/18/swift中获取到的json数据解析出错/">swift中获取到的json数据解析出错</a>
+          </li>
+        
+          <li>
+            <a href="/2016/08/06/swift中的富文本常见用法/">swift中的富文本常见用法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
